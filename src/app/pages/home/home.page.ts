@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from '../../servicios/api.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AutentificacionService } from '../../auth/autentificacion.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,7 @@ export class HomePage implements OnInit {
   seasonsData: Season[] = []; // Inicializando seasonsData como un array vacío
   showContent = false;
 
-  constructor( private rutaActiva : ActivatedRoute, private storage: Storage, private api: ApiService, private http: HttpClient) { 
+  constructor( private rutaActiva : ActivatedRoute, private authService: AutentificacionService, private storage: Storage, private api: ApiService, private http: HttpClient, private router: Router) { 
     this.rutaActiva.queryParams.subscribe((params: { [x: string]: string; }) =>{
       if(params['rutUsuario'])
       {
@@ -67,6 +69,15 @@ export class HomePage implements OnInit {
       this.mostrarEpisodios = true;
       }
     );
+  }
+
+
+  cerrarSesion() {
+    // Lógica para cerrar sesión utilizando tu servicio de autenticación
+    this.authService.logout(); // Ejemplo de método logout en tu servicio
+
+    // Redirige al usuario a la pantalla de inicio de sesión
+    this.router.navigate(['/login']); // Reemplaza '/login' por la ruta real de tu pantalla de inicio de sesión
   }
 }
 

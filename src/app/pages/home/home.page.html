@@ -14,12 +14,16 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button (click)="verStorage">Ver datos Storage</ion-button>
   <ion-header>
     <ion-toolbar>
       <ion-title>
         Asesores
       </ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="cerrarSesion()">
+          Cerrar sesión
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
@@ -36,6 +40,8 @@
       </ion-item>
     </ion-list>
 
+
+
     <ion-button (click)="getTemporada()" >
       Click me
       </ion-button>
@@ -48,6 +54,4 @@
       </ion-item>
     </ion-list>
 
-    
-  
 </ion-content>

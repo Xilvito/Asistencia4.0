@@ -6,9 +6,15 @@ describe('RegistroPage', () => {
   let fixture: ComponentFixture<RegistroPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(RegistroPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      declarations: [RegistroPage],
+    })
+    .compileComponents()
+    .then(() => {
+      fixture = TestBed.createComponent(RegistroPage);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
   }));
 
   it('should create', () => {

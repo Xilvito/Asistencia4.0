@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
-import { AuthService } from '../../auth.service';
+
 
 
 @Component({
@@ -12,13 +12,13 @@ import { AuthService } from '../../auth.service';
 export class LoginPage implements OnInit {
 
   formLogin = {
-    rut: "",
-    password: ""
+    rut:"",
+    password:""
   }
 
 
 
-  constructor(private router: Router, private storage: Storage, private autentificacion: AuthService ) { }
+  constructor(private router: Router, private storage: Storage, ) { }
 
   async ngOnInit() {
     await this.storage.create();
@@ -26,22 +26,17 @@ export class LoginPage implements OnInit {
 
   iniciarSesion()
   {
+    console.log("rut" + this.formLogin.rut)
+    console.log("password"+ this.formLogin.password)
 
-    let datosEnviar : NavigationExtras = {
+    let datosEnviar : NavigationExtras= {
       queryParams : {
         rutUsuario: this.formLogin.rut,
-        edad:24
-      
+        edad: 24
       }
     }
 
-    this.autentificacion.login(this.formLogin.rut, this.formLogin.password);
     this.router.navigate(['/home'], datosEnviar);
-    //guardar informaciuon en el storage
-    this.storage.set("nombreUsuario","Diego")
-    
-
 
   }
-
 }
