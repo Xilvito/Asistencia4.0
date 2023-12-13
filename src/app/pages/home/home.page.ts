@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from '../../servicios/api.service';
+import {camipService} from '../../servicios/camip.service'
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AutentificacionService } from '../../auth/autentificacion.service';
+
 
 @Component({
   selector: 'app-home',
@@ -21,7 +23,7 @@ export class HomePage implements OnInit {
   showContent = false;
   qrscanservice: any;
 
-  constructor( private rutaActiva : ActivatedRoute, private authService: AutentificacionService, private storage: Storage, private api: ApiService, private http: HttpClient, private router: Router) { 
+  constructor( private rutaActiva : ActivatedRoute, private authService: AutentificacionService, private storage: Storage, private api: ApiService, private http: HttpClient, private router: Router, private camipService: camipService ) { 
     this.rutaActiva.queryParams.subscribe(params =>{
       if(params['rutUsuario'])
       {
@@ -71,7 +73,7 @@ export class HomePage implements OnInit {
   }
 
   async iniciarEscaneo() {
-    const scannedText = await this.qrscanservice.startScan();
+    const scannedText = await this.camipService.iniciarEscaneo();
     if (scannedText) {
       this.mostrarAlerta(scannedText);
     }
