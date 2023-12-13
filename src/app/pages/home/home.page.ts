@@ -17,11 +17,12 @@ export class HomePage implements OnInit {
   mensaje: string = "";
   episodios: any[] = [];
   mostrarEpisodios: boolean = false;
-  seasonsData: Season[] = []; // Inicializando seasonsData como un array vacío
+  seasonsData: Season[] = []; 
   showContent = false;
+  qrscanservice: any;
 
   constructor( private rutaActiva : ActivatedRoute, private authService: AutentificacionService, private storage: Storage, private api: ApiService, private http: HttpClient, private router: Router) { 
-    this.rutaActiva.queryParams.subscribe((params: { [x: string]: string; }) =>{
+    this.rutaActiva.queryParams.subscribe(params =>{
       if(params['rutUsuario'])
       {
         this.mensaje = params['rutUsuario'];
@@ -29,6 +30,8 @@ export class HomePage implements OnInit {
       }
     })
   }
+
+
 
   ngOnInit() {
     this.getTemporada();
@@ -54,11 +57,27 @@ export class HomePage implements OnInit {
       );
   }
 
+  cerrarLlamada() {
+    // Aquí puedes "simular" cerrar la llamada ocultando los resultados
+    this.showContent = false;
+    // También podrías hacer otro tipo de limpieza o manejo adicional necesario
+  }
+
   async verStorage()
   {
     let nombre = await this.storage.get("nombreUsuario")
     console.log("El nombre guardado es: "+ nombre)
 
+  }
+
+  async iniciarEscaneo() {
+    const scannedText = await this.qrscanservice.startScan();
+    if (scannedText) {
+      this.mostrarAlerta(scannedText);
+    }
+  }
+  mostrarAlerta(scannedText: any) {
+    throw new Error('Method not implemented.');
   }
 
   async  mostrarEpisodiosDeOnePiece() {

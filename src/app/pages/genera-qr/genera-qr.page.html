@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generar código QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">generaQR</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  
+
+  <ion-card>
+
+    <ion-list>
+      <ion-item>
+        <ion-select label="Seleccione Asignatura"  (ionChange)="cambiarOpcion($event)" [(ngModel)]="preqr" placeholder="Clases">
+          <ion-select-option *ngFor="let clase of listaClase" >{{clase.nombre_clase}}</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-button (click)="mostrarQR()">Generar Codigo QR</ion-button>
+    <ion-card-content *ngIf="mostrar">
+      
+      <qrcode [qrdata]="qrdata + preqr" > 
+      </qrcode>
+      
+      
+
+      
+    </ion-card-content>
+  </ion-card>
+
+  <ion-toolbar>
+    <ion-button [routerLink]="['/home']" >
+      volver
+    </ion-button>
+    <ion-buttons slot="end">
+      <ion-button  (click)="logOut()">
+        cerrar sesion
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-content>

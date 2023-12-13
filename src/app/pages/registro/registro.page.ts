@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroPage implements OnInit {
 
+  
+  formLogin = {
+    rut:"",
+    password:""
+  }
   constructor() { }
 
   ngOnInit() {

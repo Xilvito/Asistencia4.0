@@ -39,4 +39,7 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/home'], datosEnviar);
 
   }
+  olvido(){
+    this.router.navigate(['reestablecer']);
+  }
 }

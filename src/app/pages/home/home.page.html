@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="title-header">Home {{ mensaje }}</ion-title>
+    <ion-title>home {{mensaje}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,42 +10,57 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large" class="title-header">Home</ion-title>
+      <ion-title size="large">home</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-header>
     <ion-toolbar>
-      <ion-title class="section-title">Asesores</ion-title>
+      <ion-title>
+        Asesores
+      </ion-title>
       <ion-buttons slot="end">
-        <ion-button (click)="cerrarSesion()" class="logout-button">
+        <ion-button (click)="cerrarSesion()">
           Cerrar sesión
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
-  <ion-button color="primary" (click)="mostrarEpisodiosDeOnePiece()" class="action-button">
-    Mostrar Episodios
-  </ion-button>
-
-  <ion-list *ngIf="mostrarEpisodios">
-    <ion-item *ngFor="let episodio of episodios">
-      <ion-label>
-        <h2>{{ episodio.title }}</h2>
-        <p>Episodio: {{ episodio.id }}</p>
-        <!-- Agrega más campos según la estructura de tus datos -->
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ion-button (click)="getTemporada()" class="action-button">
-    Click me
-  </ion-button>
   
-  <ion-list *ngIf="showContent">
-    <ion-item *ngFor="let season of seasonsData">
-      {{ season.title }}: {{ season.id }} 
-    </ion-item>
-  </ion-list>
+    <ion-button color="primary" (click)="mostrarEpisodiosDeOnePiece()">Mostrar Episodios</ion-button>
+
+    <ion-list *ngIf="mostrarEpisodios">
+      <ion-item *ngFor="let episodio of episodios">
+        <ion-label>
+          <h2>{{ episodio.title }}</h2>
+          <p>Episodio: {{ episodio.id }}</p>
+          <!-- Agrega más campos según la estructura de tus datos -->
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-button  size="large" (click)="iniciarEscaneo()" expand="block"  >Iniciar Escaneo</ion-button>
+
+    <ion-button  size="large" [routerLink]="['/genera-qr']" expand="block"  >Generar QR</ion-button>
+
+
+
+    <ion-button (click)="getTemporada()" >
+      Click me
+      </ion-button>
+
+
+      <ion-button *ngIf="showContent" (click)="cerrarLlamada()">
+        Cerrar llamada
+      </ion-button>
+    
+     <ion-list *ngIf="showContent">
+      <ion-item *ngFor="let season of seasonsData">
+        
+        
+        {{ season.title }}: {{ season.id }} 
+      </ion-item>
+    </ion-list>
+
 </ion-content>
